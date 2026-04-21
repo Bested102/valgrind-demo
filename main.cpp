@@ -49,7 +49,6 @@ int main() {
   printList(list);
 
   freeList(list);
-  list = nullptr;
 
   Node* leakNode = new Node;
   leakNode->value = 99;
