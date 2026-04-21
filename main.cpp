@@ -38,11 +38,9 @@ void freeList(Node* head) {
 
   while (temp != nullptr) {
     Node* next = temp->next;
+    delete temp;
     temp = next;
-	delete next;
   }
-delete temp;
-delete head;
 }
 
 int main() {
@@ -50,24 +48,22 @@ int main() {
 
   printList(list);
 
-  cout << list->value << endl;
-
   freeList(list);
+  list = nullptr;
 
   Node* leakNode = new Node;
   leakNode->value = 99;
   leakNode->next = nullptr;
 
   cout << leakNode->value << endl;
+  delete leakNode;
 
-  int* arr = new int[6];
+  int* arr = new int[3];
   arr[0] = 1;
   arr[1] = 2;
   arr[2] = 3;
-  arr[5] = 999;
 
   delete[] arr;
-	delete[] leakNode;
 
   return 0;
 }
