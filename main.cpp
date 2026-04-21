@@ -38,17 +38,17 @@ void freeList(Node* head) {
 
   while (temp != nullptr) {
     Node* next = temp->next;
-    delete temp;
     temp = next;
+	delete next;
   }
+delete temp;
+delete head;
 }
 
 int main() {
   Node* list = createList(5);
 
   printList(list);
-
-  freeList(list);
 
   cout << list->value << endl;
 
@@ -60,13 +60,14 @@ int main() {
 
   cout << leakNode->value << endl;
 
-  int* arr = new int[3];
+  int* arr = new int[6];
   arr[0] = 1;
   arr[1] = 2;
   arr[2] = 3;
   arr[5] = 999;
 
   delete[] arr;
+	delete[] leakNode;
 
   return 0;
 }
